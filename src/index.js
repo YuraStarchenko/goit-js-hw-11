@@ -1,1 +1,2 @@
-import './api/main';
+import './api/script';
+import './api/api';

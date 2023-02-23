@@ -1,4 +1,8 @@
-import fetchData from "./api.js";
+
+
+import { fetchData } from "./api";
+import { createMarkupImg } from "./markup"
+
 
 const form = document.getElementById("search-form");
 

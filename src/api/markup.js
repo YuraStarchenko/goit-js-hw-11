@@ -1,4 +1,4 @@
-function createMarkupCountriInfo(arr) {
+export function createMarkupImg(images) {
   return images
     .map(
       ({

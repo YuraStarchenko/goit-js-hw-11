@@ -56,21 +56,34 @@
 //!   }
 //! }
 
-const URL = 'https://pixabay.com/api/';
+// const URL = 'https://pixabay.com/api/';
 
-const searchParams = new URLSearchParams({
-  key: '33854415-dab75466e51d96ca7439b60b4',
-  image_type: 'photo',
-  orientation: 'horizontal',
-  safesearch: true,
-  per_page: 10,
-});
+// const searchParams = new URLSearchParams({
+//   key: '33854415-dab75466e51d96ca7439b60b4',
+//   image_type: 'photo',
+//   orientation: 'horizontal',
+//   safesearch: true,
+//   per_page: 10,
+// });
 
-console.log(searchParams.toString());
+// console.log(searchParams.toString());
 
-const url = `${URL}?&${searchParams}`;
-console.log(url);
+// const url = `${URL}?&${searchParams}`;
+// console.log(url);
+	
+export function fetchData(query) {
+	const URL = `https://pixabay.com/api/?q=${query}`;
+	const searchParams = new URLSearchParams({
+    key: '33854415-dab75466e51d96ca7439b60b4',
+    image_type: 'photo',
+    orientation: 'horizontal',
+    safesearch: true,
+    per_page: 10,
+	});
+	console.log(searchParams.toString());
 
-fetch(url)
-  .then(r => r.json())
-  .then(({ hits }) => console.log(hits));
+  const url = `${URL}?&${searchParams}`;
+  console.log(url);
+
+	fetch(url).then(r => r.json());
+}

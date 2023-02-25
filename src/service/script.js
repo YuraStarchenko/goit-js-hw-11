@@ -91,11 +91,11 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 function onSearch(e) {
   e.preventDefault();
 
-  PixabayApiService.searchQuery = e.currentTarget.searchQuery.value.trim();
+  pixabayApiService.searchQuery = e.currentTarget.searchQuery.value.trim();
 
-  pixabayApiService.fetchHits(searchQuery);
+  pixabayApiService.fetchHits();
 }
 
 function onLoadMore() {
-  pixabayApiService.fetchHits(searchQuery);
+  pixabayApiService.fetchHits();
 }

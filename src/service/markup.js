@@ -1,4 +1,4 @@
-export function createMarkup(galleryItems) {
+export default function createMarkup(galleryItems) {
   return galleryItems
     .map(
       ({

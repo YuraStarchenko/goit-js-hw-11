@@ -1,2 +1,2 @@
-import './api/script';
-import './api/pixabayAPI';
+import './service/script';
+import './service/pixabayAPI';

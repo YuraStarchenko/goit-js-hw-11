@@ -74,7 +74,7 @@
 // 	captionPosition:'bottom',
 // 	captionDelay:'250'
 // });
-
+import createMarkup from './markup';
 import PixabayApiService from './pixabayAPI.js';
 
 const refs = {
@@ -92,10 +92,18 @@ function onSearch(e) {
   e.preventDefault();
 
   pixabayApiService.searchQuery = e.currentTarget.searchQuery.value.trim();
-
-  pixabayApiService.fetchHits();
+  pixabayApiService.resetPage();
+  pixabayApiService.fetchHits().then(appendGalleryMarkup);
 }
 
 function onLoadMore() {
-  pixabayApiService.fetchHits();
+  pixabayApiService.fetchHits().then(appendGalleryMarkup);
+}
+
+function appendGalleryMarkup(hits) {
+	refs.gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
+}
+
+function clearGalleryContainer() {
+
 }

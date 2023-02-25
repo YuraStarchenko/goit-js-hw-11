@@ -1,0 +1,2 @@
+!function(){var e={searchForm:document.getElementById("search-form"),gallery:document.querySelector(".gallery"),loadMoreBtn:document.querySelector(".load-more")},t="";e.searchForm.addEventListener("submit",(function(e){e.preventDefault(),t=e.currentTarget.searchQuery.value.trim();fetch("".concat("https://pixabay.com/api/","/?key=").concat("33854415-dab75466e51d96ca7439b60b4","&q=").concat(t,"?&per_page=5&page")).then((function(e){return e.json()})).then(console.log)}))}();
+//# sourceMappingURL=index.57598246.js.map

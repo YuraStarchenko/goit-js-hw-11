@@ -1,4 +1,4 @@
-// export function createMarkupImg(images) {
+// export function createMarkup(images) {
 //   return images
 //     .map(
 //       ({

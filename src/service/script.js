@@ -74,6 +74,7 @@
 // 	captionPosition:'bottom',
 // 	captionDelay:'250'
 // });
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import createMarkup from './markup';
 import PixabayApiService from './pixabayAPI.js';
 
@@ -90,8 +91,13 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch(e) {
   e.preventDefault();
-
-  pixabayApiService.searchQuery = e.currentTarget.searchQuery.value.trim();
+  clearGalleryContainer();
+  pixabayApiService.query = e.currentTarget.searchQuery.value.trim();
+  if (pixabayApiService.query === '') {
+    return Notify.failure(
+      'Sorry, there are no images matching your search query. Please try again.'
+    );
+  }
   pixabayApiService.resetPage();
   pixabayApiService.fetchHits().then(appendGalleryMarkup);
 }
@@ -101,9 +107,9 @@ function onLoadMore() {
 }
 
 function appendGalleryMarkup(hits) {
-	refs.gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
+  refs.gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
 }
 
 function clearGalleryContainer() {
-
+  refs.gallery.innerHTML = '';
 }

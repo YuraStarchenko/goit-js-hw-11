@@ -41,11 +41,10 @@ export default class PixabayApiService {
     const URL = `${ENDPOINT}/?key=${KEY}&q=${this.searchQuery}?&per_page=5&page=${this.page}`;
 
     return fetch(URL)
-      .then(r => r.json())
-      .then(data => {
+      .then(response => response.json())
+      .then(({ hits }) => {
         this.incrementPage();
-
-        return data.hits;
+        return hits;
       });
   }
 

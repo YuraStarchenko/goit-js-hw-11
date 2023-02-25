@@ -75,25 +75,27 @@
 // 	captionDelay:'250'
 // });
 
+import PixabayApiService from './pixabayAPI.js';
+
 const refs = {
   searchForm: document.getElementById('search-form'),
   gallery: document.querySelector('.gallery'),
   loadMoreBtn: document.querySelector('.load-more'),
 };
 
-let searchQuery = '';
+const pixabayApiService = new PixabayApiService();
 
 refs.searchForm.addEventListener('submit', onSearch);
+refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch(e) {
-	e.preventDefault();
-	
-	searchQuery = e.currentTarget.searchQuery.value.trim();
+  e.preventDefault();
 
-  const ENDPOINT = 'https://pixabay.com/api/';
-  const KEY = '33854415-dab75466e51d96ca7439b60b4';
+  PixabayApiService.searchQuery = e.currentTarget.searchQuery.value.trim();
 
-  fetch(`${ENDPOINT}/?key=${KEY}&q=${searchQuery}?&per_page=5&page`)
-    .then(r => r.json())
-    .then(console.log);
+  pixabayApiService.fetchHits(searchQuery);
+}
+
+function onLoadMore() {
+  pixabayApiService.fetchHits(searchQuery);
 }

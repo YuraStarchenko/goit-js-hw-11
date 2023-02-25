@@ -30,3 +30,24 @@
 //   }
 // }
 
+export default class PixabayApiService {
+  constructor() {
+    this.searchQuery = '';
+  }
+  fetchHits() {
+    const ENDPOINT = 'https://pixabay.com/api/';
+    const KEY = '33854415-dab75466e51d96ca7439b60b4';
+
+    fetch(`${ENDPOINT}/?key=${KEY}&q=${this.searchQuery}?&per_page=5&page`)
+      .then(r => r.json())
+      .then(console.log);
+  }
+
+  get query() {
+    return this.searchQuery;
+  }
+
+  set query(newQuery) {
+    this.searchQuery = newQuery;
+  }
+}

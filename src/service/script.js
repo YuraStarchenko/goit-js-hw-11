@@ -36,9 +36,9 @@ async function fetchHits() {
 
   try {
     const hits = await hitsPixabayApi.getHits();
-    console.log('🧏🏻‍♂️ ~ hits', hits);
-    if (hits.length === 0 || hits === '')
-      return Notify.failure(
+
+    if (hits.length === 0 || hitsPixabayApi.searchQuery === '')
+      return  Notify.failure (
         'Sorry, there are no images matching your search query. Please try again.'
       );
     const markup = hits.reduce(
@@ -46,9 +46,10 @@ async function fetchHits() {
       ''
     );
     appendHitsImage(markup);
-    loadMoreBtn.hide();
-  } catch (onError) {
-    console.error(onError);
+    loadMoreBtn.enable();
+	} catch (err) {
+		loadMoreBtn.hide();
+    console.error(err);
   }
 }
 
@@ -60,7 +61,7 @@ function removeHitsImage() {
   gallery.innerHTML = '';
 }
 
-function onError(err) {
-  console.error(err);
-  //  loadMoreBtn.enable();
-}
+// function onError(err) {
+//   console.error(err);
+//   loadMoreBtn.hide();
+// }

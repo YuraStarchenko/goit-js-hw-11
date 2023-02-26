@@ -1,16 +1,12 @@
-// import SimpleLightbox from 'simplelightbox';
-// import 'simplelightbox/dist/simple-lightbox.min.css';
-
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
-// import { refs } from './refs';
-
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import createMarkup from './markup';
 import HitsPixabayApi from './pixabayAPI.js';
 import LoadMoreBtn from './LoadMoreBtn';
 
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
-// const loadMoreBtn = document.getElementById('load-more');
 
 const hitsPixabayApi = new HitsPixabayApi();
 const loadMoreBtn = new LoadMoreBtn({
@@ -43,15 +39,15 @@ function fetchHits() {
     .getHits()
     .then(hits => {
       if (hits.length === 0)
-        throw new Error(
+          Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
         );
       return hits.reduce((markup, hits) => createMarkup(hits) + markup, '');
     })
 		.then((markup) => {
-			appendHitsImage(markup);
-			loadMoreBtn.enable();
-		})
+      appendHitsImage(markup);
+      loadMoreBtn.hide();
+    })
     .catch(onError);
 }
 
@@ -65,7 +61,6 @@ function removeHitsImage() {
 }
 
 function onError(err) {
-	console.error(err);
-	loadMoreBtn.hide();
-  appendHitsImage('<p>Hits not found</p>');
+  console.error(err);
+//  loadMoreBtn.enable();
 }

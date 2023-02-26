@@ -36,11 +36,38 @@
 //     this.searchQuery = newQuery;
 //   }
 // }
-const ENDPOINT = 'https://pixabay.com/api/';
-const KEY = '33854415-dab75466e51d96ca7439b60b4';
+// const ENDPOINT = 'https://pixabay.com/api/';
+// const KEY = '33854415-dab75466e51d96ca7439b60b4';
 // const URL = `${ENDPOINT}?key=${KEY}&q=image_type=photo&orientation=horizontal&safesearch=true&per_page=10&page=1`;
 
-export default function fetchData(searchQuery) {
-	const URL = `${ENDPOINT}?key=${KEY}&q=${searchQuery}&per_page=5&page=1`;
-  return fetch(URL).then(response => response.json());
+// export default function fetchData(searchQuery) {
+// 	const URL = `${ENDPOINT}?key=${KEY}&q=${searchQuery}&per_page=5&page=1`;
+//   return fetch(URL).then(response => response.json());
+// }
+const ENDPOINT = 'https://pixabay.com/api/';
+const KEY = '33854415-dab75466e51d96ca7439b60b4';
+export default class HitsPixabayApi {
+  constructor() {
+    this.page = 1;
+    this.per_page = 5;
+    this.searchQuery = '';
+  }
+  getHits() {
+    const URL = `${ENDPOINT}?key=${KEY}&q=${this.searchQuery}&per_page=${this.per_page}&page=${this.page}`;
+
+    return fetch(URL)
+      .then(response => response.json())
+      .then(({ hits }) => {
+        this.nextPage();
+        return hits;
+      });
+  }
+
+  nextPage() {
+    this.page += 1;
+  }
+
+  resetPage() {
+    this.page = 1;
+  }
 }

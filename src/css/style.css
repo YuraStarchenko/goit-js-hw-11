@@ -16,7 +16,7 @@ img {
 	justify-content: center;
 	margin-bottom: 15px;
 	padding: 10px 0px;
-	background-color: #24308e;
+	background-color: #248b8e;
 	gap: 10px;
 }
 
@@ -53,8 +53,25 @@ button {
 	margin-bottom: 10px;
 	color: #fff;
 	background-color: #24308e;
+	border-radius: 15px;
 }
 
+input[type="submit"],
+button {
+	border: none;
+	background-color: rgba(45, 45, 233, 0.731);
+	color: white;
+	cursor: pointer;
+}
+
+#load-more:disabled {
+	background-color: #c1c1c1;
+	cursor: not-allowed;
+}
+
+#load-more.hidden {
+	display: none;
+}
 .is-hidden {
 	display: none;
 }

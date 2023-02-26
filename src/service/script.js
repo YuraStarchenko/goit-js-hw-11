@@ -11,60 +11,56 @@ const gallery = document.querySelector('.gallery');
 const hitsPixabayApi = new HitsPixabayApi();
 const loadMoreBtn = new LoadMoreBtn({
   selector: '#load-more',
-  isHidden: true
+  isHidden: true,
 });
 console.log(hitsPixabayApi);
 console.log(loadMoreBtn);
-
 
 form.addEventListener('submit', onSubmit);
 loadMoreBtn.button.addEventListener('click', fetchHits);
 
 function onSubmit(e) {
-	e.preventDefault();
-  // if (hitsPixabayApi.searchQuery === '') {
-  //   return Notify.failure(
-  //     'Sorry, there are no images matching your search query. Please try again.'
-  //   );
-  // }
+  e.preventDefault();
   const form = e.currentTarget;
-	const value = form.elements.searchQuery.value.trim();
-	removeHitsImage();
-	hitsPixabayApi.resetPage();
-	loadMoreBtn.show();
-	hitsPixabayApi.searchQuery = value;
+  const value = form.elements.searchQuery.value.trim();
+  removeHitsImage();
+  hitsPixabayApi.resetPage();
+  loadMoreBtn.show();
+  hitsPixabayApi.searchQuery = value;
 
-fetchHits().finally(() => form.reset());
+  fetchHits().finally(() => form.reset());
 }
 
-function fetchHits() {
-	loadMoreBtn.disable();
-  return hitsPixabayApi
-    .getHits()
-    .then(hits => {
-      if (hits.length === 0)
-          Notify.failure(
-          'Sorry, there are no images matching your search query. Please try again.'
-        );
-      return hits.reduce((markup, hits) => createMarkup(hits) + markup, '');
-    })
-		.then((markup) => {
-      appendHitsImage(markup);
-      loadMoreBtn.hide();
-    })
-    .catch(onError);
+async function fetchHits() {
+  loadMoreBtn.disable();
+
+  try {
+    const hits = await hitsPixabayApi.getHits();
+    console.log('🧏🏻‍♂️ ~ hits', hits);
+    if (hits.length === 0 || hits === '')
+      return Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
+    const markup = hits.reduce(
+      (markup, hits) => createMarkup(hits) + markup,
+      ''
+    );
+    appendHitsImage(markup);
+    loadMoreBtn.hide();
+  } catch (onError) {
+    console.error(onError);
+  }
 }
 
 function appendHitsImage(markup) {
-	gallery.insertAdjacentHTML('beforeend', markup);
-	
+  gallery.insertAdjacentHTML('beforeend', markup);
 }
 
 function removeHitsImage() {
-  gallery.innerHTML = "";
+  gallery.innerHTML = '';
 }
 
 function onError(err) {
   console.error(err);
-//  loadMoreBtn.enable();
+  //  loadMoreBtn.enable();
 }

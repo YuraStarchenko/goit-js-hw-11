@@ -22,7 +22,11 @@ loadMoreBtn.button.addEventListener('click', fetchHits);
 
 function onSubmit(e) {
 	e.preventDefault();
-	
+  if (hitsPixabayApi.searchQuery === '') {
+    return Notify.failure(
+      'Sorry, there are no images matching your search query. Please try again.'
+    );
+  }
   const form = e.currentTarget;
 	const value = form.elements.searchQuery.value.trim();
 	removeHitsImage();

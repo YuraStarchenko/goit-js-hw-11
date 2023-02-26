@@ -14,6 +14,8 @@ const refs = {
   loadMoreBtn: document.querySelector('.load-more'),
 };
 
+// loadMoreBtn.classList.add('is-hidden');
+
 const pixabayApiService = new PixabayApiService();
 
 refs.searchForm.addEventListener('submit', onSearch);

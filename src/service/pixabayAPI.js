@@ -35,17 +35,15 @@ export default class PixabayApiService {
     this.searchQuery = '';
     this.page = 1;
   }
-  fetchHits() {
+  async fetchHits() {
     const ENDPOINT = 'https://pixabay.com/api/';
     const KEY = '33854415-dab75466e51d96ca7439b60b4';
     const URL = `${ENDPOINT}/?key=${KEY}&q=${this.searchQuery}?&per_page=5&page=${this.page}`;
 
-    return fetch(URL)
-      .then(response => response.json())
-      .then(({ hits }) => {
-        this.incrementPage();
-        return hits;
-      });
+    const response = await fetch(URL);
+		const { hits } = await response.json();
+		this.incrementPage();
+		return hits;
   }
 
   incrementPage() {

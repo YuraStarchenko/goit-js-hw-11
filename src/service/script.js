@@ -3,47 +3,8 @@
 
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // import { refs } from './refs';
-// import createMarkup from './markup';
-// import PixabayApiService from './pixabayAPI.js';
-// import LoadMoreBtn from './LoadMoreBtn';
 
-// const pixabayApiService = new PixabayApiService();
-// const loadMoreBtn = new LoadMoreBtn({
-// 	selector: '#',
-// 	isHidden: true,
-// });
-// console.log(loadMoreBtn);
-
-// refs.searchForm.addEventListener('submit', onSearch);
-// refs.loadMoreBtn.button.addEventListener('click', onLoadMore);
-
-// async function onSearch(e) {
-//   e.preventDefault();
-//   clearGalleryContainer();
-//   pixabayApiService.query = e.currentTarget.searchQuery.value.trim();
-
-//   if (pixabayApiService.query === '') {
-//     return Notify.failure(
-//       'Sorry, there are no images matching your search query. Please try again.'
-//     );
-//   }
-
-//   pixabayApiService.resetPage();
-//   pixabayApiService.fetchHits().then(appendGalleryMarkup);
-// }
-
-// function onLoadMore() {
-// 	pixabayApiService.fetchHits().then(appendGalleryMarkup);
-// }
-
-// function appendGalleryMarkup(hits) {
-//   refs.gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
-// }
-
-// function clearGalleryContainer() {
-//   refs.gallery.innerHTML = '';
-// }
-
+import createMarkup from './markup';
 import HitsPixabayApi from './pixabayAPI.js';
 import LoadMoreBtn from './LoadMoreBtn';
 
@@ -101,42 +62,6 @@ function appendHitsImage(markup) {
 
 function removeHitsImage() {
   gallery.innerHTML = "";
-}
-
-function createMarkup({
-  tags,
-  webformatURL,
-  largeImageURL,
-  likes,
-  views,
-  comments,
-  downloads,
-}) {
-  return `
-		<div class="photo-card">
-			<a class="images-link" href="${largeImageURL}">
-				<img src="${webformatURL}" alt="${tags}" loading="lazy" />
-			</a>
-			<div class="info">
-				<p class="info-item">
-				<b>Likes</b>:
-				${likes}
-				</p>
-				<p class="info-item">
-  				<b>Views</b>:
-				${views}
-				</p>
-				<p class="info-item">
-  				<b>Comments</b>:
-				${comments}
-				</p>
-				<p class="info-item">
-  				<b>Downloads</b>:
-				${downloads}
-				</p>				
-			</div>				
-		</div>
-	`;
 }
 
 function onError(err) {

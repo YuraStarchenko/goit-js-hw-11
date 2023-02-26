@@ -20,10 +20,10 @@ async function onSearch(e) {
     return Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
-	}
+  }
 
   pixabayApiService.resetPage();
-	pixabayApiService.fetchHits().then(appendGalleryMarkup);
+  pixabayApiService.fetchHits().then(appendGalleryMarkup);
 }
 
 function onLoadMore() {

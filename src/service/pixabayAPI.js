@@ -1,8 +1,8 @@
 import axios from 'axios';
 export default class PixabayApiService {
   constructor() {
-		this.searchQuery = '';
-		this.per_page = 10;
+    this.searchQuery = '';
+    this.per_page = 10;
     this.page = 1;
   }
   async fetchHits() {

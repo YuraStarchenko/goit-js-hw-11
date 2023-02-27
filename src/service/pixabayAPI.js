@@ -6,14 +6,14 @@ export default class HitsPixabayApi {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
-    this.per_page = 5;
+		this.per_page = 5;
   }
   async fetchHits() {
-		const URL = `${ENDPOINT}?key=${KEY}&q=${this.searchQuery}&per_page=${this.per_page}&page=${this.page}`;
-		
-      const { data } = await axios.get(URL);
-      this.nextPage();
-      return data.hits;
+    const URL = `${ENDPOINT}?key=${KEY}&q=${this.searchQuery}&per_page=${this.per_page}&page=${this.page}`;
+
+    const { data } = await axios.get(URL);
+    this.nextPage();
+    return data.hits;
   }
   nextPage() {
     this.page += 1;
@@ -30,4 +30,5 @@ export default class HitsPixabayApi {
   set query(newQuery) {
     this.searchQuery = newQuery;
   }
+
 }

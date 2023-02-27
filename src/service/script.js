@@ -18,7 +18,6 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: '250',
 });
 
-
 form.addEventListener('submit', onSubmit);
 loadMoreBtn.button.addEventListener('click', fetchHits);
 

@@ -7,6 +7,7 @@ export default class HitsPixabayApi {
     this.searchQuery = '';
     this.page = 1;
 		this.per_page = 40;
+		this.totalPages = 0;
   }
   async fetchHits() {
     const URL = `${ENDPOINT}?key=${KEY}&q=${this.searchQuery}&per_page=${this.per_page}&page=${this.page}`;
@@ -29,6 +30,13 @@ export default class HitsPixabayApi {
 
   set query(newQuery) {
     this.searchQuery = newQuery;
+	}
+	
+  setTotal(total) {
+    this.totalPages = total;
   }
 
+  hasMorePhotos() {
+    return this.page < Math.ceil(this.totalPages / this.per_page);
+  }
 }

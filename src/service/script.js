@@ -23,17 +23,15 @@ console.log(loadMoreBtn);
 form.addEventListener('submit', onSubmit);
 loadMoreBtn.button.addEventListener('click', fetchHits);
 
-
-
 function onSubmit(e) {
   e.preventDefault();
   const form = e.currentTarget;
   const value = form.elements.searchQuery.value.trim();
-  removeHitsImage();
+	removeHitsImage();
+	lightbox.refresh();
   hitsPixabayApi.resetPage();
   loadMoreBtn.show();
   hitsPixabayApi.searchQuery = value;
-
   fetchHits().finally(() => form.reset());
 }
 
@@ -41,24 +39,23 @@ async function fetchHits() {
   loadMoreBtn.disable();
 
   try {
-    const hits = await hitsPixabayApi.getHits();
-
+		const hits = await hitsPixabayApi.getHits();
     if (hits.length === 0 || hitsPixabayApi.searchQuery === '')
-      return  Notify.failure (
+      return Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
     const markup = hits.reduce(
       (markup, hits) => createMarkup(hits) + markup,
       ''
     );
-    appendHitsImage(markup);
+		appendHitsImage(markup);
+		lightbox.refresh();
     loadMoreBtn.enable();
-	} catch (err) {
-		loadMoreBtn.hide();
+  } catch (err) {
+    loadMoreBtn.hide();
     console.error(err);
   }
 }
-lightbox.refresh();
 function appendHitsImage(markup) {
   gallery.insertAdjacentHTML('beforeend', markup);
 }
@@ -66,8 +63,3 @@ function appendHitsImage(markup) {
 function removeHitsImage() {
   gallery.innerHTML = '';
 }
-
-// function onError(err) {
-//   console.error(err);
-//   loadMoreBtn.hide();
-// }

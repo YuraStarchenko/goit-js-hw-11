@@ -83,7 +83,7 @@ a {
 
 input {
 	padding: 10px 150px 10px 10px;
-	border-radius: 5px;
+	border-radius: 15px;
 	border: none;
 	outline: none;
 	font-size: 15px;
@@ -96,7 +96,7 @@ input {
 }
 
 button {
-	border-radius: 5px;
+	border-radius: 15px;
 	border: none;
 
 	padding: 10px;
@@ -112,7 +112,7 @@ button {
 	margin-bottom: 10px;
 	color: #fff;
 	background-color: #cb7373;
-	border-radius: 10px;
+	border-radius: 15px;
 }
 
 #load-more:hover {

@@ -87,10 +87,16 @@ input {
 	font-size: 15px;
 }
 
-@media screen and (min-width: 100px) {
+@media screen and (max-width: 320px) {
 	input {
 			padding: 10px 50px 10px 10px;
 		}
+}
+
+@media screen and (max-width: 480px) {
+	input {
+		padding: 10px 50px 10px 10px;
+	}
 }
 
 button {

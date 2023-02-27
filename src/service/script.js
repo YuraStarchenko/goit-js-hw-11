@@ -16,6 +16,13 @@ const loadMoreBtn = new LoadMoreBtn({
 const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: '250',
 });
+// const { hits, totalHits } = await pixabay.getImages();
+// pixabay.setTotal(totalHits);
+//  Notify.success(`Hooray! We found ${totalHits} images.`);
+
+// pixaby.setTotal(total);
+// Notify.success(`Hooray! We found ${total} images.`, notifyInit);
+
 
 console.log(hitsPixabayApi);
 console.log(loadMoreBtn);
@@ -27,8 +34,8 @@ function onSubmit(e) {
   e.preventDefault();
   const form = e.currentTarget;
   const value = form.elements.searchQuery.value.trim();
-	removeHitsImage();
-	lightbox.refresh();
+  removeHitsImage();
+  lightbox.refresh();
   hitsPixabayApi.resetPage();
   loadMoreBtn.show();
   hitsPixabayApi.searchQuery = value;
@@ -39,7 +46,7 @@ async function fetchHits() {
   loadMoreBtn.disable();
 
   try {
-		const hits = await hitsPixabayApi.getHits();
+    const hits = await hitsPixabayApi.getHits();
     if (hits.length === 0 || hitsPixabayApi.searchQuery === '')
       return Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
@@ -48,14 +55,16 @@ async function fetchHits() {
       (markup, hits) => createMarkup(hits) + markup,
       ''
     );
-		appendHitsImage(markup);
-		lightbox.refresh();
+    appendHitsImage(markup);
+    lightbox.refresh();
     loadMoreBtn.enable();
   } catch (err) {
     loadMoreBtn.hide();
     console.error(err);
   }
 }
+
+
 function appendHitsImage(markup) {
   gallery.insertAdjacentHTML('beforeend', markup);
 }

@@ -7,7 +7,7 @@ export default class HitsPixabayApi {
     this.page = 1;
     this.per_page = 40;
     this.searchQuery = '';
-    this.totalPages = 0;
+    // this.totalPages = 0;
   }
   async getHits() {
     const URL = `${ENDPOINT}?key=${KEY}&q=${this.searchQuery}&per_page=${this.per_page}&page=${this.page}`;
@@ -25,11 +25,11 @@ export default class HitsPixabayApi {
     this.page = 1;
   }
 
-  setTotal(total) {
-    this.totalPages = total;
-	}
+  // setTotal(total) {
+  //   this.totalPages = total;
+	// }
 	
-  hasMorePhotos() {
-    return this.page < Math.ceil(this.totalPages / this.per_page);
-  }
+  // hasMorePhotos() {
+  //   return this.page < Math.ceil(this.totalPages / this.per_page);
+  // }
 }

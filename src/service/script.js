@@ -16,13 +16,6 @@ const loadMoreBtn = new LoadMoreBtn({
 const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: '250',
 });
-// const { hits, totalHits } = await pixabay.getImages();
-// pixabay.setTotal(totalHits);
-//  Notify.success(`Hooray! We found ${totalHits} images.`);
-
-// pixaby.setTotal(total);
-// Notify.success(`Hooray! We found ${total} images.`, notifyInit);
-
 
 console.log(hitsPixabayApi);
 console.log(loadMoreBtn);

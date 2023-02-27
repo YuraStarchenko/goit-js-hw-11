@@ -9,11 +9,8 @@ export default class HitsPixabayApi {
     this.per_page = 5;
   }
   async fetchHits() {
-    const URL = `${ENDPOINT}?key=${KEY}&q=${this.searchQuery}&per_page=${this.per_page}&page=${this.page}`;
-    // const response = await fetch(URL);
-		// const { hits } = await response.json();
-		// this.nextPage();
-		// return hits;
+		const URL = `${ENDPOINT}?key=${KEY}&q=${this.searchQuery}&per_page=${this.per_page}&page=${this.page}`;
+		
       const { data } = await axios.get(URL);
       this.nextPage();
       return data.hits;

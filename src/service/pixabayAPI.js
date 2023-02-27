@@ -6,7 +6,7 @@ export default class HitsPixabayApi {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
-		this.per_page = 5;
+		this.per_page = 40;
   }
   async fetchHits() {
     const URL = `${ENDPOINT}?key=${KEY}&q=${this.searchQuery}&per_page=${this.per_page}&page=${this.page}`;

@@ -87,13 +87,9 @@ input {
 	font-size: 15px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (min-width: 100px) {
 	input {
 			padding: 10px 50px 10px 10px;
-			border-radius: 5px;
-			border: none;
-			outline: none;
-			font-size: 15px;
 		}
 }
 

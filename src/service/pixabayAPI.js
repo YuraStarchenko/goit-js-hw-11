@@ -5,7 +5,7 @@ const KEY = '33854415-dab75466e51d96ca7439b60b4';
 export default class HitsPixabayApi {
   constructor() {
     this.page = 1;
-    this.per_page = 5;
+    this.per_page = 40;
     this.searchQuery = '';
   }
   async getHits() {

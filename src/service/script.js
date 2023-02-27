@@ -19,6 +19,8 @@ console.log(loadMoreBtn);
 form.addEventListener('submit', onSubmit);
 loadMoreBtn.button.addEventListener('click', fetchHits);
 
+
+
 function onSubmit(e) {
   e.preventDefault();
   const form = e.currentTarget;
@@ -52,7 +54,7 @@ async function fetchHits() {
     console.error(err);
   }
 }
-
+lightbox.refresh();
 function appendHitsImage(markup) {
   gallery.insertAdjacentHTML('beforeend', markup);
 }
@@ -65,3 +67,9 @@ function removeHitsImage() {
 //   console.error(err);
 //   loadMoreBtn.hide();
 // }
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: '250',
+});

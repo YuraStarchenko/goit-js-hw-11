@@ -13,6 +13,10 @@ const loadMoreBtn = new LoadMoreBtn({
   selector: '#load-more',
   isHidden: true,
 });
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionDelay: '250',
+});
+
 console.log(hitsPixabayApi);
 console.log(loadMoreBtn);
 
@@ -67,9 +71,3 @@ function removeHitsImage() {
 //   console.error(err);
 //   loadMoreBtn.hide();
 // }
-
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionPosition: 'bottom',
-  captionDelay: '250',
-});

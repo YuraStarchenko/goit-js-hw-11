@@ -57,9 +57,9 @@ async function fetchHits() {
     );
     appendHitsImage(markup);
     lightbox.refresh();
-    loadMoreBtn.enable();
-  } catch (err) {
-    loadMoreBtn.hide();
+		loadMoreBtn.enable();
+	} catch (err) {
+		loadMoreBtn.show();
     console.error(err);
   }
 }

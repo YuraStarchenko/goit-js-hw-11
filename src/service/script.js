@@ -55,9 +55,7 @@ async function fetchHits() {
     loadMoreBtn.show();
     console.error(err);
   }
-  const totalHits = await hitsPixabayApi.getHits();
-  if (totalHits.length === 0)
-    Notify.success(`Hooray! We found ${totalHits} images.`);
+    Notify.success(`Hooray! We found totalHits images.`);
 }
 
 function appendHitsImage(markup) {

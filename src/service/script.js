@@ -43,16 +43,6 @@ function fetchHits() {
     appendHitsImage(hits);
     lightbox.refresh();
     loadMoreBtn.enable();
-    	  // pagesAmount = Math.ceil(totalHits / 40);
-    // if (Math.ceil(totalHits / 40);) {
-    // } else {
-    //   if (hits.length < 1) {
-    //     ;
-    //   }
-
-    // Notify.failure(
-    //   'Sorry, there are no images matching your search query. Please try again.'
-    // ),
     if (Math.ceil(totalHits / 40)) {
       return (
         Notify.success(`Hooray! We found ${totalHits} images.`),
@@ -60,6 +50,12 @@ function fetchHits() {
       );
     } else {
       loadMoreBtn.show();
+    }
+    if (hits.length < 1) {
+      Notify.failure(
+        'Sorry, there are no images matching your search query. Please try again.'
+			);
+			loadMoreBtn.show();
     }
   });
 }

@@ -29,8 +29,8 @@ function onSubmit(e) {
   if (hitsPixabayApi.query === ``) {
     return Notify.info(`Please enter the text request`);
   }
-	removeHitsImage();
-	hitsPixabayApi.resetPage();
+  removeHitsImage();
+  hitsPixabayApi.resetPage();
   loadMoreBtn.show();
   fetchHits();
 }
@@ -41,22 +41,18 @@ function fetchHits() {
     appendHitsImage(hits);
     lightbox.refresh();
     loadMoreBtn.enable();
+    if (hits.length < 1) {
+      return (
+        Notify.failure(
+          `Sorry, there are no images matching your search query. Please try again.`
+        ),
+        loadMoreBtn.hide()
+      );
+    } else {
+      loadMoreBtn.show();
+    }
   });
 }
-
-// hitsPixabayApi.fetchHits().then(hits => {
-//   appendHitsImage(hits);
-//   if (hits.length < 1) {
-//     return (
-//       Notify.failure(
-//         `Sorry, there are no images matching your search query. Please try again.`
-//       ),
-//       loadMoreBtn.hide()
-//     );
-//   } else {
-//     loadMoreBtn.show();
-//   }
-// });
 
 function appendHitsImage(hits) {
   gallery.insertAdjacentHTML('beforeend', createMarkup(hits));

@@ -37,27 +37,28 @@ function onSubmit(e) {
 }
 
 function fetchHits() {
-  loadMoreBtn.disable();
-  hitsPixabayApi.fetchHits().then(hits => {
-    appendHitsImage(hits);
-    lightbox.refresh();
-    loadMoreBtn.enable();
-    if (hits.length < 1) {
-      return (
-        Notify.failure(
-          'Sorry, there are no images matching your search query. Please try again.'
-        ),
-        loadMoreBtn.hide()
-      );
-    } else {
-      loadMoreBtn.show();
-    }
-  });
-
-function appendHitsImage(hits) {
-  gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
+	loadMoreBtn.disable();
+	hitsPixabayApi.fetchHits().then(hits => {
+		appendHitsImage(hits);
+		lightbox.refresh();
+		loadMoreBtn.enable();
+		if (hits.length < 1) {
+			return (
+				Notify.failure(
+					'Sorry, there are no images matching your search query. Please try again.'
+				),
+				loadMoreBtn.hide()
+			);
+		} else {
+			loadMoreBtn.show();
+		}
+	});
 }
 
-function removeHitsImage() {
-  gallery.innerHTML = '';
-}
+	function appendHitsImage(hits) {
+		gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
+	}
+
+	function removeHitsImage() {
+		gallery.innerHTML = '';
+	}

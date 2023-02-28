@@ -37,16 +37,16 @@ function onSubmit(e) {
 
 function fetchHits() {
   loadMoreBtn.disable();
-  hitsPixabayApi.fetchHits().then(hits => {
+	hitsPixabayApi.fetchHits().then(hits => {
     appendHitsImage(hits);
     lightbox.refresh();
     loadMoreBtn.enable();
     if (hits.length < 1) {
-      return (
-        Notify.failure(
-          `Sorry, there are no images matching your search query. Please try again.`
-        ),
-        loadMoreBtn.hide()
+			return (
+				Notify.failure(
+					`Sorry, there are no images matching your search query. Please try again.`
+				),
+				loadMoreBtn.hide()
       );
     } else {
       loadMoreBtn.show();

@@ -35,6 +35,7 @@ function onSubmit(e) {
 }
 
 function fetchHits() {
+  loadMoreBtn.disable();
   hitsPixabayApi.fetchHits().then(({ hits, totalHits }) => {
     appendHitsImage(hits);
     lightbox.refresh();

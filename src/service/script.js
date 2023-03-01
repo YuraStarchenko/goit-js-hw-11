@@ -5,8 +5,6 @@ import createMarkup from './markup';
 import HitsPixabayApi from './pixabayAPI.js';
 import LoadMoreBtn from './LoadMoreBtn';
 
-let pagesAmount;
-
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
 
@@ -31,6 +29,7 @@ function onSubmit(e) {
   if (hitsPixabayApi.query === ``) {
     return Notify.info(`Please enter the text request`);
   }
+
   removeHitsImage();
   hitsPixabayApi.resetPage();
   loadMoreBtn.show();
@@ -51,11 +50,16 @@ function fetchHits() {
     } else {
       loadMoreBtn.show();
     }
+
     if (hits.length < 1) {
-      Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.'
-			);
-			loadMoreBtn.show();
+      return (
+        Notify.failure(
+          'Sorry, there are no images matching your search query. Please try again.'
+        ),
+        loadMoreBtn.hide()
+      );
+    } else {
+      loadMoreBtn.show();
     }
   });
 }

@@ -29,18 +29,14 @@ function onSubmit(e) {
   if (hitsPixabayApi.query === ``) {
     return Notify.info(`Please enter the text request`);
   }
-
-  loadMoreBtn.show();
   hitsPixabayApi.resetPage();
   removeHitsImage();
   fetchHits();
 }
 
 function fetchHits() {
-  loadMoreBtn.disable();
   hitsPixabayApi.fetchHits().then(({ hits, totalHits }) => {
     appendHitsImage(hits);
-    loadMoreBtn.enable();
     lightbox.refresh();
     const total = hitsPixabayApi.hasMorePhotos();
     if (total >= hits) {
@@ -48,12 +44,14 @@ function fetchHits() {
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
         ),
-        loadMoreBtn.show()
+        loadMoreBtn.hide(),
+        loadMoreBtn.disable()
       );
     } else {
       return (
         Notify.success(`Hooray! We found ${totalHits} images.`),
-        loadMoreBtn.show()
+        loadMoreBtn.show(),
+        loadMoreBtn.enable()
       );
     }
   });

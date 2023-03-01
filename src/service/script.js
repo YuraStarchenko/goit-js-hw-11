@@ -38,30 +38,35 @@ function onSubmit(e) {
 
 function fetchHits() {
   loadMoreBtn.disable();
-  hitsPixabayApi.fetchHits().then(({ hits, totalHits }) => {
-    appendHitsImage(hits);
-    lightbox.refresh();
-    loadMoreBtn.enable();
-    if (Math.ceil(totalHits / 40)) {
-      return (
-        Notify.success(`Hooray! We found ${totalHits} images.`),
-        loadMoreBtn.hide()
-      );
-    } else {
-      loadMoreBtn.show();
-    }
+  hitsPixabayApi
+    .fetchHits()
+    .then(({ hits, totalHits }) => {
+      appendHitsImage(hits);
+      lightbox.refresh();
+      loadMoreBtn.enable();
+      if (Math.ceil(totalHits / 40)) {
+        return (
+          Notify.success(`Hooray! We found ${totalHits} images.`),
+          loadMoreBtn.hide()
+        );
+      } else {
+        loadMoreBtn.show();
+      }
 
-    if (hits.length < 1) {
-      return (
-        Notify.failure(
-          'Sorry, there are no images matching your search query. Please try again.'
-        ),
-        loadMoreBtn.hide()
-      );
-    } else {
-      loadMoreBtn.show();
-    }
-  });
+      if (hits.length < 1) {
+        return (
+          Notify.failure(
+            'Sorry, there are no images matching your search query. Please try again.'
+          ),
+          loadMoreBtn.hide()
+        );
+      } else {
+        loadMoreBtn.show();
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
 }
 
 function appendHitsImage(hits) {
